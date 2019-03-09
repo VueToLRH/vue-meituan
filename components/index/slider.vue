@@ -29,18 +29,6 @@ export default {
         img: 'http://p1.meituan.net/codeman/bb0abb3435a60c44d87e90ed4237b61039329.jpg'
       }]
     }
-  },
-  methods: {
-    // over: function (e) {
-    //   let dom = e.target
-    //   let tag = dom.tagName.toLowerCase()
-    //   let self = this
-    //   if (tag === 'dd') {
-    //     this.kind = dom.getAttribute('kind')
-    //     let keyword = dom.getAttribute('keyword')
-    //     let ()
-    //   }
-    // }
   }
 }
 </script>

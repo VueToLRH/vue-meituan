@@ -57,6 +57,20 @@ export default {
     cur: function() {
       return this.list[this.kind]
     }
+  },
+  methods: {
+    over: function(e) {
+      const dom = e.target
+      const tag = dom.tagName.toLowerCase()
+      // toLowerCase() 方法用于把字符串转换为小写。
+      // const self = this
+      console.log('tag', tag)
+      if (tag === 'dd') {
+        this.kind = dom.getAttribute('kind') // 获取标签自定义属性 kind，kind 用于表示类别
+        const keyword = dom.getAttribute('keyword') // 获取标签自定义属性 keyword
+        console.log('keyword', keyword)
+      }
+    }
   }
 }
 </script>
