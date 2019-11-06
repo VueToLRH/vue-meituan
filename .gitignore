@@ -82,3 +82,5 @@ dist
 
 # Service worker
 sw.*
+
+server/dbs/config.js
