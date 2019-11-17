@@ -19,7 +19,7 @@
       </dd>
     </dl>
     <ul class="ibody">
-      <li v-for="item in cur" :key="item.title">
+      <li v-for="item in cur" :key="item.id">
         <el-card :body-style="{padding: '0px'}" shadow="never">
           <img :src="item.img" alt="images">
           <ul class="cbody">
@@ -58,17 +58,57 @@ export default {
       return this.list[this.kind]
     }
   },
+  async mounted() {
+    const self = this
+    const { status, data: { count, pois }} = await self.$axios.get('/search/resultsByKeywords', {
+      params: {
+        keyword: '景点',
+        city: self.$store.state.geo.position.city
+      }
+    })
+    if (status === 200 && count > 0) {
+      const r = pois.filter(item => item.photos.length).map(item => {
+        return {
+          title: item.name,
+          pos: item.type.split(';')[0],
+          price: item.biz_ext.cost || '暂无',
+          img: item.photos[0].url,
+          url: '//abc.com'
+        }
+      })
+      self.list[self.kind] = r.slice(0, 9)
+    } else {
+      self.list[self.kind] = []
+    }
+  },
   methods: {
-    over: function(e) {
+    over: async function(e) {
       const dom = e.target
-      const tag = dom.tagName.toLowerCase()
-      // toLowerCase() 方法用于把字符串转换为小写。
-      // const self = this
-      console.log('tag', tag)
+      const tag = dom.tagName.toLowerCase() // toLowerCase() 方法用于把字符串转换为小写。
+      const self = this
       if (tag === 'dd') {
         this.kind = dom.getAttribute('kind') // 获取标签自定义属性 kind，kind 用于表示类别
         const keyword = dom.getAttribute('keyword') // 获取标签自定义属性 keyword
-        console.log('keyword', keyword)
+        const { status, data: { count, pois }} = await self.$axios.get('/search/resultsByKeywords', {
+          params: {
+            keyword,
+            city: self.$store.state.geo.position.city
+          }
+        })
+        if (status === 200 && count > 0) {
+          const r = pois.filter(item => item.photos.length).map(item => {
+            return {
+              title: item.name,
+              pos: item.type.split(';')[0],
+              price: item.biz_ext.cost || '暂无',
+              img: item.photos[0].url,
+              url: '//abc.com'
+            }
+          })
+          self.list[self.kind] = r.slice(0, 9)
+        } else {
+          self.list[self.kind] = []
+        }
       }
     }
   }

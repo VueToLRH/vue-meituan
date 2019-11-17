@@ -2,7 +2,7 @@
   <div class="m-menu">
     <dl class="nav" @mouseleave="mouseleave">
       <dt>全部分类</dt>
-      <dd v-for="(item, index) in menu" :key="index" @mouseenter="enter">
+      <dd v-for="(item, index) in $store.state.home.menu" :key="index" @mouseenter="enter">
         <i :class="item.type" />{{ item.name }}<span class="arrow" />
       </dd>
     </dl>
@@ -55,7 +55,7 @@ export default {
   computed: {
     // 通过 当前鼠标进入的分类，分类属性存储在 kind 中，对比 kind 找到进入分类的子分类信息
     curdetail() {
-      return this.menu.filter((item) => {
+      return this.$store.state.home.menu.filter((item) => {
         return item.type === this.kind
       })[0]
     }
