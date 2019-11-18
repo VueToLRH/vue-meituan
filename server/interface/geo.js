@@ -7,7 +7,6 @@ const router = new Router({ prefix: '/geo' })
 
 const sign = 'abcd'
 
-
 // 获取城市定位接口
 router.get('/getPosition', async(ctx) => {
   const {
@@ -50,7 +49,7 @@ router.get('/province', async(ctx) => {
 })
 
 // 通过省获取城市接口
-router.get('/province/:id', async (ctx) => {
+router.get('/province/:id', async(ctx) => {
   // let city = await City.findOne({id: ctx.params.id})
   //
   // ctx.body = {
@@ -59,9 +58,9 @@ router.get('/province/:id', async (ctx) => {
   //     return {province: item.province, id: item.id, name: item.name}
   //   })
   // }
-  let {status, data: {
-      city
-    }} = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
+  const { status, data: {
+    city
+  }} = await axios.get(`http://cp-tools.cn/geo/province/${ctx.params.id}?sign=${sign}`)
   if (status === 200) {
     ctx.body = {
       city
@@ -74,7 +73,7 @@ router.get('/province/:id', async (ctx) => {
 })
 
 // 获取城市接口
-router.get('/city', async (ctx) => {
+router.get('/city', async(ctx) => {
   // let city = []
   // let result = await City.find()
   // result.forEach(item => {
@@ -92,9 +91,9 @@ router.get('/city', async (ctx) => {
   //     }
   //   })
   // }
-  let {status, data: {
-      city
-    }} = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`);
+  const { status, data: {
+    city
+  }} = await axios.get(`http://cp-tools.cn/geo/city?sign=${sign}`)
   if (status === 200) {
     ctx.body = {
       city
@@ -107,7 +106,7 @@ router.get('/city', async (ctx) => {
 })
 
 // 获取热门城市接口
-router.get('/hotCity', async (ctx) => {
+router.get('/hotCity', async(ctx) => {
   // let list = [
   //   '北京市',
   //   '上海市',
@@ -128,9 +127,9 @@ router.get('/hotCity', async (ctx) => {
   // ctx.body = {
   //   hots: nList
   // }
-  let {status, data: {
-      hots
-    }} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`);
+  const { status, data: {
+    hots
+  }} = await axios.get(`http://cp-tools.cn/geo/hotCity?sign=${sign}`)
   if (status === 200) {
     ctx.body = {
       hots
