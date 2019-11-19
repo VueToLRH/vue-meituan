@@ -1,13 +1,13 @@
 import Router from 'koa-router'
 import axios from './utils/axios'
-import Poi from '../dbs/models/poi'
+// import Poi from '../dbs/models/poi'
 
-let router = new Router({prefix: '/search'})
+const router = new Router({ prefix: '/search' })
 
 const sign = 'abcd'
 
 // 获取搜索排行
-router.get('/top', async (ctx) => {
+router.get('/top', async(ctx) => {
   // try {
   //   let top = await Poi.find({
   //     'name': new RegExp(ctx.query.input),
@@ -29,7 +29,7 @@ router.get('/top', async (ctx) => {
   //     top: []
   //   }
   // }
-  let {
+  const {
     status,
     data: { top }
   } = await axios.get(`http://cp-tools.cn/search/top`, {
@@ -46,7 +46,7 @@ router.get('/top', async (ctx) => {
 })
 
 // 获取热门搜索
-router.get('/hotPlace', async (ctx) => {
+router.get('/hotPlace', async(ctx) => {
   // let city = ctx.store ? ctx.store.geo.position.city : ctx.query.city
   // try {
   //   let result = await Poi.find({
@@ -69,11 +69,11 @@ router.get('/hotPlace', async (ctx) => {
   //     result: []
   //   }
   // }
-  let city = ctx.store ? ctx.store.geo.position.city : ctx.query.city
-  let {
-      status,
-      data: { result }
-    } = await axios.get(`http://cp-tools.cn/search/hotPlace`, {
+  const city = ctx.store ? ctx.store.geo.position.city : ctx.query.city
+  const {
+    status,
+    data: { result }
+  } = await axios.get(`http://cp-tools.cn/search/hotPlace`, {
     params: {
       sign,
       city
@@ -84,10 +84,10 @@ router.get('/hotPlace', async (ctx) => {
   }
 })
 
-// 通过关键车返回结果
-router.get('/resultsByKeywords', async (ctx) => {
-  const {city, keyword} = ctx.query;
-  let {
+// 通过关键词返回结果
+router.get('/resultsByKeywords', async(ctx) => {
+  const { city, keyword } = ctx.query
+  const {
     status,
     data: { count, pois }
   } = await axios.get('http://cp-tools.cn/search/resultsByKeywords', {
