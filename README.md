@@ -18,20 +18,5 @@
 + 克隆代码： `git clone https://gitee.com/VueToLRH/vue-imoocmall.git`
 + 安装相关依赖：`npm install` (或使用淘宝镜像：`cnpm install`)
 + 运行项目：`npm run dev`
-
-``` bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
++ 启动 `MongoDB`：`mongod --dbpath C:\MongoDB\data`
++ 启动 `redis`：`redis-server`
